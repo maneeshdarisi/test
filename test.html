@@ -1,0 +1,56 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<input type="text" id="query"/>
+<input type="button" onclick=creationOfSubConditionNode() id="go" value="subcondition"/>
+<input type="button" onclick=andFunction() id="go1" value="AND"/>
+<input type="button" onclick=orFunction() id="go2" value="OR"/>
+<input type="button" onclick=myfunction2() id="go3" value="create node"/>//kishore desai part 
+// list for genration of subConditionNodes
+<select id="sub-condition-list"> </select>
+ //list of relation operator
+ <select id="relational-operator-list">
+    <option value=">=">greater than & equal to</option>
+    <option value="<=">less than & equal to</option>
+    <option value=">">greater than</option>
+	<option value="<">less than</option>
+    <option value="=">equal to</option>
+	<option value="!"> not equal to</option>
+</select>
+ 
+<script>
+    function creationOfSubConditionNode()
+    {// Create a new option element.
+    var optionNode = document.createElement("option");
+     // Set the value and add brackets
+    optionNode.value= "("+$("#query").val()+")";
+     // create a text node and append it to the option element
+    optionNode.appendChild(document.createTextNode($("#query").val()));
+     // Add the optionNode to the datalist
+    document.getElementById("sub-condition-list").appendChild(optionNode);
+	//clear the output of the textBox
+	$("#query").val("");
+   }
+    $("#sub-condition-list option:selected").change(function() {
+    var selectedVal = $(this).val();
+    	var selectedText = $(this).find(':selected').text();
+	var presentTextValue=$("#query").val();
+	$("#query").val(selectedVal+presentTextValue);
+	});
+   function andFunction()
+   {
+   //select the value of the and button
+   	var values=$("#go1").val();
+	//get the value of the  query textbox
+	var presentTextValue=$("#query").val();
+	//update the value of the  query textbox
+	$("#query").val(values+presentTextValue);
+	}
+	function orFunction()
+   {
+   //select the value of the and button
+    	var values=$("#go2").val();
+	//get the value of the  query textbox
+	var presentTextValue=$("#query").val();
+	//update the value of the  query textbox
+	$("#query").val(values+presentTextValue);
+	}
+</script>
